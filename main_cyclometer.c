@@ -52,11 +52,16 @@ volatile static uint led_level_r = 0;
 volatile static uint led_level_b = 0;
 
 // tacho variables
+static PIO pio = pio0;
 const uint PIN_TACHO = 16;//Pino A da quadratura no GPIO16. O proximo pino (17) é o sinal B da quadratura
 const uint sm = 0;
 
 //Frequencia desejada para o pisca do LED, em Hz
 const static int frequenciaAtualiza = 10;
+const static int frequenciaAtualiza_2 = 10;
+
+static int new_value, delta, old_value = 0;
+static int last_value = -1, last_delta = -1;
 
 // Pico W devices use a GPIO on the WIFI chip for the LED,
 // so when building for Pico W, CYW43_WL_GPIO_LED_PIN will be defined
@@ -79,6 +84,7 @@ void read_magnetometer(int16_t *mag);
 int pico_led_init(void);
 void pico_set_led(bool led_on);
 bool repeating_timer_callback(struct repeating_timer *t);
+bool repeating_timer_callback_2(struct repeating_timer *t);
 
 bool repeating_timer_callback(struct repeating_timer *t) {
     int16_t accel[3], gyro[3], mag[3];
@@ -117,12 +123,22 @@ bool repeating_timer_callback(struct repeating_timer *t) {
     } else {
         led_level_b = LED_OFF;
     }
-    printf("Mag X: %d, Y: %d, Z: %d\n", mag[0], mag[1], mag[2]);
-    printf("Accel: X=%d Y=%d Z=%d | Gyro: X=%d Y=%d Z=%d\n", 
-           accel[0], accel[1], accel[2], gyro[0], gyro[1], gyro[2]);
-    //printf("Gyro: X=%d Y=%d Z=%d\n", 
-    //    gyro[0], gyro[1], gyro[2]);
     //printf("Mag X: %d, Y: %d, Z: %d\n", mag[0], mag[1], mag[2]);
+    //printf("Accel: X=%d Y=%d Z=%d | Gyro: X=%d Y=%d Z=%d\n", 
+     //      accel[0], accel[1], accel[2], gyro[0], gyro[1], gyro[2]);
+    //printf("Gyro: X=%d Y=%d Z=%d\n", 
+    return true;       // Retorna true para continuar repetindo
+}
+
+bool repeating_timer_callback_2(struct repeating_timer *t) {
+    new_value = quadrature_encoder_get_count(pio, sm);
+    delta = new_value - old_value;
+    old_value = new_value;
+    if (new_value != last_value || delta != last_delta ) {
+        printf("position %8d, delta %6d\n", new_value, delta);
+        last_value = new_value;
+        last_delta = delta;
+    }
     return true;       // Retorna true para continuar repetindo
 }
 
@@ -258,13 +274,12 @@ void pico_set_led(bool led_on) {
 }
 
 int main() {
-    int new_value, delta, old_value = 0;
-    int last_value = -1, last_delta = -1;
     stdio_init_all();
     // Cria uma estrutura de timer
-    struct repeating_timer meu_timer;        
+    struct repeating_timer meu_timer, meu_timer_2;        
     // Inicia um timer repetitivo com a frequencia desejada
     bool sucesso = add_repeating_timer_ms(1000/(frequenciaAtualiza), repeating_timer_callback, NULL, &meu_timer);
+    bool sucesso2 = add_repeating_timer_ms(1000/(frequenciaAtualiza_2), repeating_timer_callback_2, NULL, &meu_timer_2);
     
     //setup pwm
     setup_pwm_r();
@@ -276,19 +291,10 @@ int main() {
     i2c_init(i2c1, 100 * 1000);
     mpu9250_init();
     int rc = pico_led_init();
-    PIO pio = pio0;
     pio_add_program(pio, &quadrature_encoder_program);
     quadrature_encoder_program_init(pio, sm, PIN_TACHO, 0);
     hard_assert(rc == PICO_OK);
     while (true) {
-        new_value = quadrature_encoder_get_count(pio, sm);
-        delta = new_value - old_value;
-        old_value = new_value;
-        if (new_value != last_value || delta != last_delta ) {
-            printf("position %8d, delta %6d\n", new_value, delta);
-            last_value = new_value;
-            last_delta = delta;
-        }
         //pico_set_led(true);
         //sleep_ms(LED_DELAY_MS);
         //pico_set_led(false);

@@ -188,3 +188,5 @@
 4018	4680	7619672909722506	CMakeFiles/Cyclometer.dir/C_/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_async_context/async_context_threadsafe_background.c.obj	f75ef49a5ccc722f
 3258	5426	7619672902124493	CMakeFiles/Cyclometer.dir/C_/Users/gjmontagner/.pico-sdk/sdk/1.5.1/lib/cyw43-driver/src/cyw43_ll.c.obj	4f2da51133de40d5
 5426	6131	7619672923806912	Cyclometer.elf	522caefa1c9303e6
+40	512	7619687111575981	CMakeFiles/Cyclometer.dir/main_cyclometer.c.obj	d2ccdb4184e20a4
+513	1236	7619687116316630	Cyclometer.elf	522caefa1c9303e6
