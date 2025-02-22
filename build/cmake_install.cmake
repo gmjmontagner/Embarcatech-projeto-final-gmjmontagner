@@ -1,4 +1,4 @@
-# Install script for directory: C:/gjmontagner/embarcatech/Unidade 7/Projeto_final_embarcado/blink
+# Install script for directory: C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/gjmontagner/embarcatech/Unidade 7/Projeto_final_embarcado/blink/build/pico-sdk/cmake_install.cmake")
+  include("C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner/build/pico-sdk/cmake_install.cmake")
 
 endif()
 
@@ -51,5 +51,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/gjmontagner/embarcatech/Unidade 7/Projeto_final_embarcado/blink/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -83,7 +83,7 @@ rule ASM_EXECUTABLE_LINKER__bs2_default_Debug
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = C:\Users\gjmontagner\.pico-sdk\cmake\v3.28.6\bin\cmake.exe --regenerate-during-build -S"C:\gjmontagner\embarcatech\Unidade 7\Projeto_final_embarcado\blink" -B"C:\gjmontagner\embarcatech\Unidade 7\Projeto_final_embarcado\blink\build"
+  command = C:\Users\gjmontagner\.pico-sdk\cmake\v3.28.6\bin\cmake.exe --regenerate-during-build -SC:\gjmontagner\embarcatech\proj_final\Embarcatech-projeto-final-gmjmontagner -BC:\gjmontagner\embarcatech\proj_final\Embarcatech-projeto-final-gmjmontagner\build
   description = Re-running CMake...
   generator = 1
 

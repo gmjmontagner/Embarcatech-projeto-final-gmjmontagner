@@ -1131,14 +1131,14 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Cyclometer::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Cyclometer-Debug-313572e9ade0894bab44.json",
+					"jsonFile" : "target-Cyclometer-Debug-f074aedd01eb5ab681ce.json",
 					"name" : "Cyclometer",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 43,
 					"id" : "bs2_default::@bc554eaed616d198a22d",
-					"jsonFile" : "target-bs2_default-Debug-b387a3884ce5491427bd.json",
+					"jsonFile" : "target-bs2_default-Debug-6bc399861059030e047f.json",
 					"name" : "bs2_default",
 					"projectIndex" : 1
 				},
@@ -1169,8 +1169,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/gjmontagner/embarcatech/Unidade 7/Projeto_final_embarcado/blink/build",
-		"source" : "C:/gjmontagner/embarcatech/Unidade 7/Projeto_final_embarcado/blink"
+		"build" : "C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner/build",
+		"source" : "C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner"
 	},
 	"version" : 
 	{

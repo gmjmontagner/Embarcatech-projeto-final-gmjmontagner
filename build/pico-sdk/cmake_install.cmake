@@ -39,9 +39,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/gjmontagner/embarcatech/Unidade 7/Projeto_final_embarcado/blink/build/pico-sdk/tools/cmake_install.cmake")
-  include("C:/gjmontagner/embarcatech/Unidade 7/Projeto_final_embarcado/blink/build/pico-sdk/src/cmake_install.cmake")
-  include("C:/gjmontagner/embarcatech/Unidade 7/Projeto_final_embarcado/blink/build/pico-sdk/docs/cmake_install.cmake")
+  include("C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner/build/pico-sdk/tools/cmake_install.cmake")
+  include("C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner/build/pico-sdk/src/cmake_install.cmake")
+  include("C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner/build/pico-sdk/docs/cmake_install.cmake")
 
 endif()
 

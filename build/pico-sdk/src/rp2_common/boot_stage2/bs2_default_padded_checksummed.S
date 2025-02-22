@@ -1,4 +1,4 @@
-// Padded and checksummed version of: C:/gjmontagner/embarcatech/Unidade 7/Projeto_final_embarcado/blink/build/pico-sdk/src/rp2_common/boot_stage2/bs2_default.bin
+// Padded and checksummed version of: C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner/build/pico-sdk/src/rp2_common/boot_stage2/bs2_default.bin
 
 .cpu cortex-m0plus
 .thumb

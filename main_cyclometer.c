@@ -114,6 +114,9 @@ bool repeating_timer_callback(struct repeating_timer *t) {
     printf("Mag X: %d, Y: %d, Z: %d\n", mag[0], mag[1], mag[2]);
     printf("Accel: X=%d Y=%d Z=%d | Gyro: X=%d Y=%d Z=%d\n", 
            accel[0], accel[1], accel[2], gyro[0], gyro[1], gyro[2]);
+    //printf("Gyro: X=%d Y=%d Z=%d\n", 
+    //    gyro[0], gyro[1], gyro[2]);
+    //printf("Mag X: %d, Y: %d, Z: %d\n", mag[0], mag[1], mag[2]);
     return true;       // Retorna true para continuar repetindo
 }
 
