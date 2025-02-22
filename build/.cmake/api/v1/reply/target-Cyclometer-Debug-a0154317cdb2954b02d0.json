@@ -16,7 +16,8 @@
 			"add_dependencies",
 			"pico_generate_pio_header",
 			"target_compile_definitions",
-			"pico_add_extra_outputs"
+			"pico_add_extra_outputs",
+			"target_include_directories"
 		],
 		"files" : 
 		[
@@ -40,7 +41,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 43,
+				"line" : 46,
 				"parent" : 0
 			},
 			{
@@ -59,6 +60,18 @@
 				"parent" : 4
 			},
 			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 43,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 45,
+				"parent" : 6
+			},
+			{
 				"command" : 3,
 				"file" : 1,
 				"line" : 75,
@@ -71,31 +84,37 @@
 				"command" : 4,
 				"file" : 3,
 				"line" : 50,
-				"parent" : 7
+				"parent" : 9
 			},
 			{
 				"command" : 3,
 				"file" : 2,
 				"line" : 45,
-				"parent" : 8
+				"parent" : 10
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 46,
+				"line" : 49,
 				"parent" : 0
 			},
 			{
 				"command" : 6,
 				"file" : 0,
-				"line" : 50,
+				"line" : 53,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 4,
 				"line" : 30,
-				"parent" : 11
+				"parent" : 13
+			},
+			{
+				"command" : 7,
+				"file" : 2,
+				"line" : 50,
+				"parent" : 6
 			}
 		]
 	},
@@ -127,11 +146,11 @@
 					"define" : "CFG_TUSB_OS=OPT_OS_PICO"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"define" : "CYW43_LWIP=0"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"define" : "LIB_PICO_ASYNC_CONTEXT_THREADSAFE_BACKGROUND=1"
 				},
 				{
@@ -143,7 +162,7 @@
 					"define" : "LIB_PICO_BIT_OPS_PICO=1"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"define" : "LIB_PICO_CYW43_ARCH=1"
 				},
 				{
@@ -275,7 +294,7 @@
 					"define" : "PICO_CXX_ENABLE_EXCEPTIONS=0"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"define" : "PICO_CYW43_ARCH_THREADSAFE_BACKGROUND=1"
 				},
 				{
@@ -295,7 +314,7 @@
 					"define" : "PICO_RP2040_USB_DEVICE_UFRAME_FIX=1"
 				},
 				{
-					"backtrace" : 12,
+					"backtrace" : 14,
 					"define" : "PICO_TARGET_NAME=\"Cyclometer\""
 				},
 				{
@@ -305,6 +324,10 @@
 			],
 			"includes" : 
 			[
+				{
+					"backtrace" : 15,
+					"path" : "C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner/build"
+				},
 				{
 					"backtrace" : 2,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/common/pico_stdlib/include"
@@ -498,39 +521,39 @@
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/hardware_pwm/include"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_cyw43_arch/include"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/lib/cyw43-driver/src"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/lib/cyw43-driver/firmware"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_cyw43_driver/cybt_shared_bus"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/hardware_dma/include"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/hardware_exception/include"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_cyw43_driver/include"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_async_context/include"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner/build/pico-sdk/src/rp2_common/pico_cyw43_driver"
 				}
 			],
@@ -546,13 +569,12 @@
 			"sourceIndexes" : 
 			[
 				0,
-				1,
 				2,
 				3,
 				4,
 				5,
 				6,
-				8,
+				7,
 				9,
 				10,
 				11,
@@ -568,15 +590,15 @@
 				21,
 				22,
 				23,
-				25,
+				24,
 				26,
-				28,
-				31,
+				27,
+				29,
 				32,
-				36,
+				33,
 				37,
-				39,
-				43,
+				38,
+				40,
 				44,
 				45,
 				46,
@@ -619,7 +641,8 @@
 				83,
 				84,
 				85,
-				86
+				86,
+				87
 			]
 		},
 		{
@@ -648,11 +671,11 @@
 					"define" : "CFG_TUSB_OS=OPT_OS_PICO"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"define" : "CYW43_LWIP=0"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"define" : "LIB_PICO_ASYNC_CONTEXT_THREADSAFE_BACKGROUND=1"
 				},
 				{
@@ -664,7 +687,7 @@
 					"define" : "LIB_PICO_BIT_OPS_PICO=1"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"define" : "LIB_PICO_CYW43_ARCH=1"
 				},
 				{
@@ -796,7 +819,7 @@
 					"define" : "PICO_CXX_ENABLE_EXCEPTIONS=0"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"define" : "PICO_CYW43_ARCH_THREADSAFE_BACKGROUND=1"
 				},
 				{
@@ -816,7 +839,7 @@
 					"define" : "PICO_RP2040_USB_DEVICE_UFRAME_FIX=1"
 				},
 				{
-					"backtrace" : 12,
+					"backtrace" : 14,
 					"define" : "PICO_TARGET_NAME=\"Cyclometer\""
 				},
 				{
@@ -826,6 +849,10 @@
 			],
 			"includes" : 
 			[
+				{
+					"backtrace" : 15,
+					"path" : "C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner/build"
+				},
 				{
 					"backtrace" : 2,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/common/pico_stdlib/include"
@@ -1019,56 +1046,56 @@
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/hardware_pwm/include"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_cyw43_arch/include"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/lib/cyw43-driver/src"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/lib/cyw43-driver/firmware"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_cyw43_driver/cybt_shared_bus"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/hardware_dma/include"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/hardware_exception/include"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_cyw43_driver/include"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_async_context/include"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner/build/pico-sdk/src/rp2_common/pico_cyw43_driver"
 				}
 			],
 			"language" : "ASM",
 			"sourceIndexes" : 
 			[
-				7,
-				24,
-				27,
-				29,
+				8,
+				25,
+				28,
 				30,
-				33,
+				31,
 				34,
 				35,
-				38,
-				40,
-				41
+				36,
+				39,
+				41,
+				42
 			]
 		},
 		{
@@ -1113,11 +1140,11 @@
 					"define" : "CFG_TUSB_OS=OPT_OS_PICO"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"define" : "CYW43_LWIP=0"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"define" : "LIB_PICO_ASYNC_CONTEXT_THREADSAFE_BACKGROUND=1"
 				},
 				{
@@ -1129,7 +1156,7 @@
 					"define" : "LIB_PICO_BIT_OPS_PICO=1"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"define" : "LIB_PICO_CYW43_ARCH=1"
 				},
 				{
@@ -1261,7 +1288,7 @@
 					"define" : "PICO_CXX_ENABLE_EXCEPTIONS=0"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"define" : "PICO_CYW43_ARCH_THREADSAFE_BACKGROUND=1"
 				},
 				{
@@ -1281,7 +1308,7 @@
 					"define" : "PICO_RP2040_USB_DEVICE_UFRAME_FIX=1"
 				},
 				{
-					"backtrace" : 12,
+					"backtrace" : 14,
 					"define" : "PICO_TARGET_NAME=\"Cyclometer\""
 				},
 				{
@@ -1291,6 +1318,10 @@
 			],
 			"includes" : 
 			[
+				{
+					"backtrace" : 15,
+					"path" : "C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner/build"
+				},
 				{
 					"backtrace" : 2,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/common/pico_stdlib/include"
@@ -1484,39 +1515,39 @@
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/hardware_pwm/include"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_cyw43_arch/include"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/lib/cyw43-driver/src"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/lib/cyw43-driver/firmware"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_cyw43_driver/cybt_shared_bus"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/hardware_dma/include"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/hardware_exception/include"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_cyw43_driver/include"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_async_context/include"
 				},
 				{
-					"backtrace" : 10,
+					"backtrace" : 12,
 					"path" : "C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner/build/pico-sdk/src/rp2_common/pico_cyw43_driver"
 				}
 			],
@@ -1531,18 +1562,22 @@
 			},
 			"sourceIndexes" : 
 			[
-				42
+				43
 			]
 		}
 	],
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 6,
+			"backtrace" : 7,
+			"id" : "Cyclometer_quadrature_encoder_pio_h::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 8,
 			"id" : "bs2_default_padded_checksummed_asm::@bc554eaed616d198a22d"
 		},
 		{
-			"backtrace" : 9,
+			"backtrace" : 11,
 			"id" : "cyw43_driver_picow_cyw43_bus_pio_spi_pio_h::@c2fb4f534018e64680d5"
 		}
 	],
@@ -2401,13 +2436,12 @@
 			"sourceIndexes" : 
 			[
 				0,
-				1,
 				2,
 				3,
 				4,
 				5,
 				6,
-				8,
+				7,
 				9,
 				10,
 				11,
@@ -2423,15 +2457,15 @@
 				21,
 				22,
 				23,
-				25,
+				24,
 				26,
-				28,
-				31,
+				27,
+				29,
 				32,
-				36,
+				33,
 				37,
-				39,
-				42,
+				38,
+				40,
 				43,
 				44,
 				45,
@@ -2475,24 +2509,26 @@
 				83,
 				84,
 				85,
-				86
+				86,
+				87
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				7,
-				24,
-				27,
-				29,
+				1,
+				8,
+				25,
+				28,
 				30,
-				33,
+				31,
 				34,
 				35,
-				38,
-				40,
-				41
+				36,
+				39,
+				41,
+				42
 			]
 		}
 	],
@@ -2503,6 +2539,11 @@
 			"compileGroupIndex" : 0,
 			"path" : "main_cyclometer.c",
 			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "quadrature_encoder.pio",
+			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 2,
@@ -2925,97 +2966,97 @@
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 10,
+			"backtrace" : 12,
 			"compileGroupIndex" : 0,
 			"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_cyw43_arch/cyw43_arch.c",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 10,
+			"backtrace" : 12,
 			"compileGroupIndex" : 0,
 			"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_cyw43_arch/cyw43_arch_poll.c",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 10,
+			"backtrace" : 12,
 			"compileGroupIndex" : 0,
 			"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_cyw43_arch/cyw43_arch_threadsafe_background.c",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 10,
+			"backtrace" : 12,
 			"compileGroupIndex" : 0,
 			"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_cyw43_arch/cyw43_arch_freertos.c",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 10,
+			"backtrace" : 12,
 			"compileGroupIndex" : 0,
 			"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_cyw43_driver/cyw43_bus_pio_spi.c",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 10,
+			"backtrace" : 12,
 			"compileGroupIndex" : 0,
 			"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/lib/cyw43-driver/src/cyw43_ll.c",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 10,
+			"backtrace" : 12,
 			"compileGroupIndex" : 0,
 			"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/lib/cyw43-driver/src/cyw43_stats.c",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 10,
+			"backtrace" : 12,
 			"compileGroupIndex" : 0,
 			"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/lib/cyw43-driver/src/cyw43_lwip.c",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 10,
+			"backtrace" : 12,
 			"compileGroupIndex" : 0,
 			"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/lib/cyw43-driver/src/cyw43_ctrl.c",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 10,
+			"backtrace" : 12,
 			"compileGroupIndex" : 0,
 			"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_cyw43_driver/cybt_shared_bus/cybt_shared_bus.c",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 10,
+			"backtrace" : 12,
 			"compileGroupIndex" : 0,
 			"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_cyw43_driver/cybt_shared_bus/cybt_shared_bus_driver.c",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 10,
+			"backtrace" : 12,
 			"compileGroupIndex" : 0,
 			"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/hardware_dma/dma.c",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 10,
+			"backtrace" : 12,
 			"compileGroupIndex" : 0,
 			"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/hardware_exception/exception.c",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 10,
+			"backtrace" : 12,
 			"compileGroupIndex" : 0,
 			"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_cyw43_driver/cyw43_driver.c",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 10,
+			"backtrace" : 12,
 			"compileGroupIndex" : 0,
 			"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_async_context/async_context_threadsafe_background.c",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 10,
+			"backtrace" : 12,
 			"compileGroupIndex" : 0,
 			"path" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_async_context/async_context_base.c",
 			"sourceGroupIndex" : 0

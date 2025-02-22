@@ -1,4 +1,5 @@
 C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner/build/CMakeFiles/Cyclometer.dir
+C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner/build/CMakeFiles/Cyclometer_quadrature_encoder_pio_h.dir
 C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner/build/CMakeFiles/edit_cache.dir
 C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner/build/CMakeFiles/rebuild_cache.dir
 C:/gjmontagner/embarcatech/proj_final/Embarcatech-projeto-final-gmjmontagner/build/pico-sdk/CMakeFiles/edit_cache.dir

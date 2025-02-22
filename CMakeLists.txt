@@ -37,7 +37,10 @@ pico_sdk_init()
 
 add_executable(Cyclometer
         main_cyclometer.c
+        quadrature_encoder.pio
     )
+
+pico_generate_pio_header(Cyclometer ${CMAKE_CURRENT_LIST_DIR}/quadrature_encoder.pio)
 
 # pull in common dependencies
 target_link_libraries(Cyclometer pico_stdlib hardware_i2c hardware_pio hardware_pwm)

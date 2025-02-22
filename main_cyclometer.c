@@ -9,6 +9,8 @@
 #include "hardware/i2c.h"
 #include "hardware/pwm.h"
 #include "hardware/timer.h"
+#include "hardware/pio.h"
+#include "quadrature_encoder.pio.h"
 
 #define MPU9250_ADDR  0x68
 #define AK8963_ADDR   0x0C
@@ -48,6 +50,10 @@ const uint16_t slice_r = 6;
 volatile static uint led_level_g = 0;
 volatile static uint led_level_r = 0;
 volatile static uint led_level_b = 0;
+
+// tacho variables
+const uint PIN_TACHO = 16;//Pino A da quadratura no GPIO16. O proximo pino (17) é o sinal B da quadratura
+const uint sm = 0;
 
 //Frequencia desejada para o pisca do LED, em Hz
 const static int frequenciaAtualiza = 10;
@@ -252,6 +258,8 @@ void pico_set_led(bool led_on) {
 }
 
 int main() {
+    int new_value, delta, old_value = 0;
+    int last_value = -1, last_delta = -1;
     stdio_init_all();
     // Cria uma estrutura de timer
     struct repeating_timer meu_timer;        
@@ -268,11 +276,22 @@ int main() {
     i2c_init(i2c1, 100 * 1000);
     mpu9250_init();
     int rc = pico_led_init();
+    PIO pio = pio0;
+    pio_add_program(pio, &quadrature_encoder_program);
+    quadrature_encoder_program_init(pio, sm, PIN_TACHO, 0);
     hard_assert(rc == PICO_OK);
     while (true) {
-        pico_set_led(true);
-        sleep_ms(LED_DELAY_MS);
-        pico_set_led(false);
-        sleep_ms(LED_DELAY_MS);
+        new_value = quadrature_encoder_get_count(pio, sm);
+        delta = new_value - old_value;
+        old_value = new_value;
+        if (new_value != last_value || delta != last_delta ) {
+            printf("position %8d, delta %6d\n", new_value, delta);
+            last_value = new_value;
+            last_delta = delta;
+        }
+        //pico_set_led(true);
+        //sleep_ms(LED_DELAY_MS);
+        //pico_set_led(false);
+        //sleep_ms(LED_DELAY_MS);
     }
 }

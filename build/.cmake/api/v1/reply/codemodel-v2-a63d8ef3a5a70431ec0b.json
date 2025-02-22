@@ -19,7 +19,8 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				},
 				{
@@ -583,9 +584,9 @@
 					"source" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/boot_stage2",
 					"targetIndexes" : 
 					[
-						1,
 						2,
-						3
+						3,
+						4
 					]
 				},
 				{
@@ -846,7 +847,7 @@
 					"source" : "C:/Users/gjmontagner/.pico-sdk/sdk/1.5.1/src/rp2_common/pico_cyw43_driver",
 					"targetIndexes" : 
 					[
-						4
+						5
 					]
 				},
 				{
@@ -1028,7 +1029,8 @@
 					"name" : "Cyclometer",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				},
 				{
@@ -1119,10 +1121,10 @@
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
-						1,
 						2,
 						3,
-						4
+						4,
+						5
 					]
 				}
 			],
@@ -1131,8 +1133,15 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Cyclometer::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Cyclometer-Debug-f074aedd01eb5ab681ce.json",
+					"jsonFile" : "target-Cyclometer-Debug-a0154317cdb2954b02d0.json",
 					"name" : "Cyclometer",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Cyclometer_quadrature_encoder_pio_h::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Cyclometer_quadrature_encoder_pio_h-Debug-5e9c06db65f2e708144e.json",
+					"name" : "Cyclometer_quadrature_encoder_pio_h",
 					"projectIndex" : 0
 				},
 				{
