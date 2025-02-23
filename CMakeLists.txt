@@ -43,7 +43,7 @@ add_executable(Cyclometer
 pico_generate_pio_header(Cyclometer ${CMAKE_CURRENT_LIST_DIR}/quadrature_encoder.pio)
 
 # pull in common dependencies
-target_link_libraries(Cyclometer pico_stdlib hardware_i2c hardware_pio hardware_pwm)
+target_link_libraries(Cyclometer pico_stdlib hardware_i2c hardware_pio hardware_pwm hardware_rtc)
 
 if (PICO_CYW43_SUPPORTED)
     target_link_libraries(Cyclometer pico_cyw43_arch_none)

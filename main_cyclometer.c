@@ -11,6 +11,8 @@
 #include "hardware/timer.h"
 #include "hardware/pio.h"
 #include "quadrature_encoder.pio.h"
+#include "hardware/rtc.h"
+#include "pico/util/datetime.h"
 
 #define MPU9250_ADDR  0x68
 #define AK8963_ADDR   0x0C
@@ -20,6 +22,9 @@
 #define CNTL1         0x0A
 #define WHO_AM_I_REG  0x75
 #define GYRO_XOUT_H 0x43
+
+#define WAIT_DATA 0
+#define RECORD_DATA 1
 
 const uint LEDG = 11;
 const uint LEDB = 12;
@@ -57,11 +62,46 @@ const uint PIN_TACHO = 16;//Pino A da quadratura no GPIO16. O proximo pino (17) 
 const uint sm = 0;
 
 //Frequencia desejada para o pisca do LED, em Hz
-const static int frequenciaAtualiza = 10;
-const static int frequenciaAtualiza_2 = 10;
+const static int frequencia_sensor = 10;
+const static int frequencia_gravacao = 2;
+const static int frequencia_pisca = 4;
 
 static int new_value, delta, old_value = 0;
 static int last_value = -1, last_delta = -1;
+static int16_t accel[3], gyro[3], mag[3];
+
+static int16_t state = WAIT_DATA;
+static uint8_t acq_mpu_done = 0;
+static uint8_t acq_tacho_done = 0;
+static uint8_t acquisition_finalized = 0;
+const int16_t total_acquisition_time_s = 30;
+
+// Start on Friday 5th of June 2020 15:45:00
+datetime_t t_mpu = {
+    .year  = 2025,
+    .month = 02,
+    .day   = 23,
+    .dotw  = 0, // 0 is Sunday, so 5 is Friday
+    .hour  = 23,
+    .min   = 59,
+    .sec   = 59
+};
+// Start on Friday 5th of June 2020 15:45:00
+datetime_t t_tacho = {
+    .year  = 2025,
+    .month = 02,
+    .day   = 23,
+    .dotw  = 0, // 0 is Sunday, so 5 is Friday
+    .hour  = 23,
+    .min   = 59,
+    .sec   = 59
+};
+
+char datetime_buf_mpu[256];
+char *datetime_str_mpu = &datetime_buf_mpu[0];
+char datetime_buf_tacho[256];
+char *datetime_str_tacho = &datetime_buf_tacho[0];
+
 // Pico W devices use a GPIO on the WIFI chip for the LED,
 // so when building for Pico W, CYW43_WL_GPIO_LED_PIN will be defined
 #ifdef CYW43_WL_GPIO_LED_PIN
@@ -83,13 +123,36 @@ void read_magnetometer(int16_t *mag);
 int pico_led_init(void);
 void pico_set_led(bool led_on);
 bool repeating_timer_callback(struct repeating_timer *t);
-bool repeating_timer_callback_2(struct repeating_timer *t);
+int64_t acquisition_finalized_callback(alarm_id_t id, __unused void *user_data);
+void execute_tacho_read();
+void set_RGB_leds(); 
 
+void pisca_led_pico(){
+    static uint8_t pisca = 0;
+    if(acquisition_finalized == 0){
+        if(pisca==1){
+            pico_set_led(true);
+            pisca = 0;
+        } else {
+            pico_set_led(false);
+            pisca = 1;
+        }
+    } else {
+        pico_set_led(true);
+    }
+}
 
-bool repeating_timer_callback(struct repeating_timer *t) {
-    int16_t accel[3], gyro[3], mag[3];
-    read_magnetometer(mag);
-    read_accel_gyro(accel, gyro);
+void execute_tacho_read(){
+    new_value = quadrature_encoder_get_count(pio, sm);
+    delta = new_value - old_value;
+    old_value = new_value;
+    if (new_value != last_value || delta != last_delta ) {
+        last_value = new_value;
+        last_delta = delta;
+    }
+}
+
+void set_RGB_leds(){
     if(abs(accel[0])>ACCL_LOW){
         led_level_r = LED_LOW;
         if(abs(accel[0])>ACCL_MID){
@@ -123,22 +186,24 @@ bool repeating_timer_callback(struct repeating_timer *t) {
     } else {
         led_level_b = LED_OFF;
     }
-    //printf("Mag X: %d, Y: %d, Z: %d\n", mag[0], mag[1], mag[2]);
-    //printf("Accel: X=%d Y=%d Z=%d | Gyro: X=%d Y=%d Z=%d\n", 
-     //      accel[0], accel[1], accel[2], gyro[0], gyro[1], gyro[2]);
-    //printf("Gyro: X=%d Y=%d Z=%d\n", 
-    return true;       // Retorna true para continuar repetindo
 }
 
-bool repeating_timer_callback_2(struct repeating_timer *t) {
-    new_value = quadrature_encoder_get_count(pio, sm);
-    delta = new_value - old_value;
-    old_value = new_value;
-    if (new_value != last_value || delta != last_delta ) {
-        printf("position %8d, delta %6d\n", new_value, delta);
-        last_value = new_value;
-        last_delta = delta;
-    }
+int64_t acquisition_finalized_callback(alarm_id_t id, __unused void *user_data) {
+    acquisition_finalized = 1;
+    printf("Acquisition finalized!\r\n");
+    return 0;
+}
+
+bool repeating_timer_callback(struct repeating_timer *t) {
+    static uint8_t count_pisca = 0;
+    rtc_get_datetime(&t_tacho);
+    rtc_get_datetime(&t_mpu);
+    execute_tacho_read();
+    read_magnetometer(mag);
+    read_accel_gyro(accel, gyro);
+    set_RGB_leds();
+    acq_mpu_done = 1;
+    acq_tacho_done = 1;
     return true;       // Retorna true para continuar repetindo
 }
 
@@ -279,8 +344,7 @@ int main() {
     // Cria uma estrutura de timer
     struct repeating_timer meu_timer, meu_timer_2;        
     // Inicia um timer repetitivo com a frequencia desejada
-    bool sucesso = add_repeating_timer_ms(1000/(frequenciaAtualiza), repeating_timer_callback, NULL, &meu_timer);
-    bool sucesso2 = add_repeating_timer_ms(1000/(frequenciaAtualiza_2), repeating_timer_callback_2, NULL, &meu_timer_2);
+    bool sucesso = add_repeating_timer_ms(1000/(frequencia_sensor), repeating_timer_callback, NULL, &meu_timer);
     //setup pwm
     setup_pwm_r();
     setup_pwm_g();  
@@ -299,8 +363,43 @@ int main() {
     i2c_read_blocking(i2c1, MPU9250_ADDR, &gyro_config, 1, false);
     printf("Gyro Config Register: 0x%02X\n", gyro_config);
     
+
+
+
+    // Start the RTC
+    rtc_init();
+    rtc_set_datetime(&t_mpu);
+    rtc_set_datetime(&t_tacho);
+    // clk_sys is >2000x faster than clk_rtc, so datetime is not updated immediately when rtc_get_datetime() is called.
+    // The delay is up to 3 RTC clock cycles (which is 64us with the default clock settings)
+    sleep_us(64);
+
+    // Call alarm_callback in 2 seconds
+    add_alarm_in_ms(total_acquisition_time_s*1000, acquisition_finalized_callback, NULL, false);
+    sleep_ms(5000);
+    printf("Timestamp; Tacho Position; \r\n");
+    printf("Timestamp; Mag X; Mag Y; Mag Z; Accel X; Accel Y; Accel Z; Gyro X; Gyro Y; Gyro Z; \r\n");
     while (true) {
-        sleep_ms(500);
+        if(acquisition_finalized == 0){
+            switch(state){
+                case WAIT_DATA:
+                    if((acq_mpu_done == 1)&&(acq_tacho_done == 1)){
+                        acq_mpu_done = 0;
+                        acq_tacho_done = 0;
+                        state = RECORD_DATA;
+                    }
+                    break;
+                case RECORD_DATA:
+                    datetime_to_str(datetime_str_mpu, sizeof(datetime_buf_mpu), &t_mpu);
+                    datetime_to_str(datetime_str_tacho, sizeof(datetime_buf_tacho), &t_tacho);
+                    printf("%s      ,%6d\r\n", datetime_str_tacho, new_value);
+                    printf("%s      ,%6d, %6d, %6d, %6d, %6d, %6d, %6d, %6d, %6d\r\n", datetime_str_mpu, mag[0], mag[1], mag[2], accel[0], accel[1], accel[2], gyro[0], gyro[1], gyro[2]);
+                    state = WAIT_DATA;
+                    break;
+            }
+        } else {
+            tight_loop_contents();
+        }
         //pico_set_led(true);
         //sleep_ms(LED_DELAY_MS);
         //pico_set_led(false);

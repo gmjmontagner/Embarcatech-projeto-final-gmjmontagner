@@ -38,6 +38,7 @@
     "raspberry-pi-pico.ninjaPath": "${HOME}/.pico-sdk/ninja/v1.12.1/ninja",
     "files.associations": {
         "stdlib.h": "c",
-        "binary_info.h": "c"
+        "binary_info.h": "c",
+        "quadrature_encoder.pio.h": "c"
     }
 }
