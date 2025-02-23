@@ -62,7 +62,6 @@ const static int frequenciaAtualiza_2 = 10;
 
 static int new_value, delta, old_value = 0;
 static int last_value = -1, last_delta = -1;
-
 // Pico W devices use a GPIO on the WIFI chip for the LED,
 // so when building for Pico W, CYW43_WL_GPIO_LED_PIN will be defined
 #ifdef CYW43_WL_GPIO_LED_PIN
@@ -85,6 +84,7 @@ int pico_led_init(void);
 void pico_set_led(bool led_on);
 bool repeating_timer_callback(struct repeating_timer *t);
 bool repeating_timer_callback_2(struct repeating_timer *t);
+
 
 bool repeating_timer_callback(struct repeating_timer *t) {
     int16_t accel[3], gyro[3], mag[3];
@@ -274,13 +274,13 @@ void pico_set_led(bool led_on) {
 }
 
 int main() {
+
     stdio_init_all();
     // Cria uma estrutura de timer
     struct repeating_timer meu_timer, meu_timer_2;        
     // Inicia um timer repetitivo com a frequencia desejada
     bool sucesso = add_repeating_timer_ms(1000/(frequenciaAtualiza), repeating_timer_callback, NULL, &meu_timer);
     bool sucesso2 = add_repeating_timer_ms(1000/(frequenciaAtualiza_2), repeating_timer_callback_2, NULL, &meu_timer_2);
-    
     //setup pwm
     setup_pwm_r();
     setup_pwm_g();  
@@ -294,7 +294,13 @@ int main() {
     pio_add_program(pio, &quadrature_encoder_program);
     quadrature_encoder_program_init(pio, sm, PIN_TACHO, 0);
     hard_assert(rc == PICO_OK);
+    uint8_t gyro_config;
+    i2c_write_blocking(i2c1, MPU9250_ADDR, (uint8_t[]){0x1B}, 1, true);
+    i2c_read_blocking(i2c1, MPU9250_ADDR, &gyro_config, 1, false);
+    printf("Gyro Config Register: 0x%02X\n", gyro_config);
+    
     while (true) {
+        sleep_ms(500);
         //pico_set_led(true);
         //sleep_ms(LED_DELAY_MS);
         //pico_set_led(false);
