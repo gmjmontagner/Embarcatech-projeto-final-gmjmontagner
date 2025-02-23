@@ -74,6 +74,8 @@ static uint8_t acq_tacho_done = 0;
 static uint8_t acquisition_finalized = 0;
 const int16_t total_acquisition_time_s = 30;
 
+const print_pretty = 1;
+
 // Start on Friday 5th of June 2020 15:45:00
 datetime_t t_mpu = {
     .year  = 2025,
@@ -390,8 +392,12 @@ int main() {
                 case RECORD_DATA:
                     datetime_to_str(datetime_str_mpu, sizeof(datetime_buf_mpu), &t_mpu);
                     datetime_to_str(datetime_str_tacho, sizeof(datetime_buf_tacho), &t_tacho);
-                    printf("%s      > Tacho: %6d\r\n", datetime_str_tacho, new_value);
-                    printf("%s      > Accel: X=%6d, Y=%6d, Z=%6d, Gyro: X=%6d, Y=%6d, Z=%6d\r\n", datetime_str_mpu, accel[0], accel[1], accel[2], gyro[0], gyro[1], gyro[2]);
+                    if(print_pretty == 1){
+                        printf("%s      > Tacho: %6d\r\n", datetime_str_tacho, new_value);
+                        printf("%s      > Accel: X=%6d, Y=%6d, Z=%6d, Gyro: X=%6d, Y=%6d, Z=%6d\r\n", datetime_str_mpu, accel[0], accel[1], accel[2], gyro[0], gyro[1], gyro[2]); 
+                    } else {
+                        printf("%s, %d, %d, %d, %d, %d, %d, %d\r\n",datetime_str_mpu,new_value,accel[0], accel[1], accel[2], gyro[0], gyro[1], gyro[2]);
+                    }
                     state = WAIT_DATA;
                     break;
             }
