@@ -62,9 +62,7 @@ const uint PIN_TACHO = 16;//Pino A da quadratura no GPIO16. O proximo pino (17) 
 const uint sm = 0;
 
 //Frequencia desejada para o pisca do LED, em Hz
-const static int frequencia_sensor = 10;
-const static int frequencia_gravacao = 2;
-const static int frequencia_pisca = 4;
+const static int frequencia_sensor = 2;
 
 static int new_value, delta, old_value = 0;
 static int last_value = -1, last_delta = -1;
@@ -190,12 +188,12 @@ void set_RGB_leds(){
 
 int64_t acquisition_finalized_callback(alarm_id_t id, __unused void *user_data) {
     acquisition_finalized = 1;
-    printf("Acquisition finalized!\r\n");
+    printf("Aquisicao finalizada!\r\n");
+    pico_set_led(true);
     return 0;
 }
 
 bool repeating_timer_callback(struct repeating_timer *t) {
-    static uint8_t count_pisca = 0;
     rtc_get_datetime(&t_tacho);
     rtc_get_datetime(&t_mpu);
     execute_tacho_read();
@@ -392,17 +390,13 @@ int main() {
                 case RECORD_DATA:
                     datetime_to_str(datetime_str_mpu, sizeof(datetime_buf_mpu), &t_mpu);
                     datetime_to_str(datetime_str_tacho, sizeof(datetime_buf_tacho), &t_tacho);
-                    printf("%s      ,%6d\r\n", datetime_str_tacho, new_value);
-                    printf("%s      ,%6d, %6d, %6d, %6d, %6d, %6d, %6d, %6d, %6d\r\n", datetime_str_mpu, mag[0], mag[1], mag[2], accel[0], accel[1], accel[2], gyro[0], gyro[1], gyro[2]);
+                    printf("%s      > Tacho: %6d\r\n", datetime_str_tacho, new_value);
+                    printf("%s      > Accel: X=%6d, Y=%6d, Z=%6d, Gyro: X=%6d, Y=%6d, Z=%6d\r\n", datetime_str_mpu, accel[0], accel[1], accel[2], gyro[0], gyro[1], gyro[2]);
                     state = WAIT_DATA;
                     break;
             }
         } else {
             tight_loop_contents();
         }
-        //pico_set_led(true);
-        //sleep_ms(LED_DELAY_MS);
-        //pico_set_led(false);
-        //sleep_ms(LED_DELAY_MS);
     }
 }
